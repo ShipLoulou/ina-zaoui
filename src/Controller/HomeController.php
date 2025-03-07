@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
+use App\Repository\UserRepository;
 use App\Repository\AlbumRepository;
 use App\Repository\MediaRepository;
-use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
 
 class HomeController extends AbstractController
 {
@@ -17,13 +20,13 @@ class HomeController extends AbstractController
     ) {}
 
     #[Route('/', name: 'home')]
-    public function home()
+    public function home(): Response
     {
         return $this->render('front/home.html.twig');
     }
 
     #[Route('/guests', name: 'guests')]
-    public function guests()
+    public function guests(): Response
     {
         $guests = $this->userRepository->findBy(['admin' => false]);
         return $this->render('front/guests.html.twig', [
@@ -32,7 +35,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/guests/{id}', name: 'guest')]
-    public function guest(int $id)
+    public function guest(int $id): Response
     {
         $guest = $this->userRepository->find($id);
         return $this->render('front/guest.html.twig', [
@@ -41,9 +44,9 @@ class HomeController extends AbstractController
     }
 
     #[Route('/portfolio/{id}', name: 'portfolio')]
-    public function portfolio(?int $id = null)
+    public function portfolio(?int $id = null): Response
     {
-        $albums = $this->albumRepository->findAll();;
+        $albums = $this->albumRepository->findAll();
         $album = $id ? $this->albumRepository->find($id) : null;
         $user = $this->userRepository->findOneByAdmin(true);
 
@@ -57,10 +60,8 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/about", name="about")
-     */
-    public function about()
+    #[Route('/about', name: 'about')]
+    public function about(): Response
     {
         return $this->render('front/about.html.twig');
     }

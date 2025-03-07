@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use PhpStaticAnalysis\Attributes\Type;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -29,6 +31,7 @@ class User
     private ?string $email = null;
 
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'user')]
+    #[Type('Collection<int, Media>')]
     private Collection $medias;
 
     public function __construct()
@@ -73,11 +76,17 @@ class User
         $this->description = $description;
     }
 
+    /**
+     * @return Collection<int, Media>
+     */
     public function getMedias(): Collection
     {
         return $this->medias;
     }
 
+    /**
+     * @param Collection<int, Media> $medias
+     */
     public function setMedias(Collection $medias): void
     {
         $this->medias = $medias;
