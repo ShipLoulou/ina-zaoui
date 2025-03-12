@@ -1,0 +1,75 @@
+<?php
+
+// namespace App\DataFixtures;
+
+// use Faker\Factory;
+// use App\Entity\User;
+// use App\Entity\Album;
+// use App\Entity\Media;
+// use Doctrine\Persistence\ObjectManager;
+// use Doctrine\Bundle\FixturesBundle\Fixture;
+// use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
+// use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+// class TestFixtures extends Fixture implements FixtureGroupInterface
+// {
+//     public function __construct(
+//         private UserPasswordHasherInterface $encoder
+//     ) {}
+
+//     public static function getGroups(): array
+//     {
+//         return ['test'];
+//     }
+
+//     public function load(ObjectManager $manager): void
+//     {
+//         $faker = Factory::create('fr_FR');
+
+//         $users = [];
+//         for ($index = 0; $index < 10; $index++) {
+//             $user = new User();
+//             $hash = $this->encoder->hashPassword($user, 'password');
+//             $user->setName("user n°$index");
+//             if ($index === 0) {
+//                 $user->setAdmin(true);
+//                 $user->setRoles(['ROLE_ADMIN']);
+//             } else {
+//                 $user->setAdmin(false);
+//             }
+//             $user->setEmail("user$index@gmail.com");
+//             $user->setDescription($faker->paragraph(1));
+//             $user->setPassword($hash);
+
+//             $users[] = $user;
+//             $manager->persist($user);
+//         }
+
+//         $albums = [];
+//         for ($index = 1; $index < 4; $index++) {
+//             $album = new Album();
+//             $album->setName("Album $index");
+
+//             $albums[] = $album;
+//             $manager->persist($album);
+//         }
+
+//         for ($index = 1; $index < 20; $index++) {
+//             $media = new Media();
+
+//             /** @var User */
+//             $user = $faker->randomElement($users);
+//             $media->setUser($user);
+
+//             /** @var Album */
+//             $album = $faker->randomElement($albums);
+//             $media->setAlbum($album);
+//             $media->setPath("uploads/000$index.jpg");
+//             $media->setTitle("Titre $index");
+
+//             $manager->persist($media);
+//         }
+
+//         $manager->flush();
+//     }
+// }

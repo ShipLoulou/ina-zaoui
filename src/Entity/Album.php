@@ -21,6 +21,11 @@ class Album
         return $this->id;
     }
 
+    public function setId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getName(): string
     {
         return $this->name;
