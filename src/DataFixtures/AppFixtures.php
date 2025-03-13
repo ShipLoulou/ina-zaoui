@@ -81,7 +81,7 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
                 $media->setAlbum(null);
             }
 
-            $formattedIndex = str_pad($index, 4, '0', STR_PAD_LEFT);
+            $formattedIndex = str_pad($index + 1, 4, '0', STR_PAD_LEFT);
             $media->setPath("uploads/$formattedIndex.jpg");
 
             $media->setTitle("Titre $index");

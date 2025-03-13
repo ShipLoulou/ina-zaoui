@@ -46,7 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Media>
      */
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'ass')]
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'user')]
     private Collection $medias;
 
     public function __construct()
@@ -84,7 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      *
-     * @return array<string>
+     * @return list<string>
      */
     public function getRoles(): array
     {
@@ -173,22 +173,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->medias;
     }
 
-    public function addMedia(Media $media): static
+    public function addMedia(Media $madia): static
     {
-        if (!$this->medias->contains($media)) {
-            $this->medias->add($media);
-            $media->setUser($this);
+        if (!$this->medias->contains($madia)) {
+            $this->medias->add($madia);
+            $madia->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeMedia(Media $media): static
+    public function removeMedia(Media $madia): static
     {
-        if ($this->medias->removeElement($media)) {
+        if ($this->medias->removeElement($madia)) {
             // set the owning side to null (unless already changed)
-            if ($media->getUser() === $this) {
-                $media->setUser(null);
+            if ($madia->getUser() === $this) {
+                $madia->setUser(null);
             }
         }
 
