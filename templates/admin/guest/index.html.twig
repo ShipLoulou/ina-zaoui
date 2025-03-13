@@ -21,11 +21,11 @@
 					<td>{{ guest.email }}</td>
 					{% if guest.status %}
 						<td>
-							<a href="#" class="btn btn-danger">Bloquer</a>
+							<a href="{{ path('admin_guest_update_status', {'id': guest.id}) }}" class="btn btn-danger">Bloquer</a>
 						</td>
 					{% else %}
 						<td>
-							<a href="#" class="btn btn-info">Débloquer</a>
+							<a href="{{ path('admin_guest_update_status', {'id': guest.id}) }}" class="btn btn-info">Débloquer</a>
 						</td>
 					{% endif %}
 					<td>

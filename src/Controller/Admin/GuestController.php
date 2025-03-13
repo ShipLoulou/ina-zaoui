@@ -67,4 +67,21 @@ class GuestController extends AbstractController
 
         return $this->render('admin/guest/add.html.twig', ['form' => $form->createView()]);
     }
+
+    #[Route('admin/guest/update/status/{id}', name: 'admin_guest_update_status')]
+    public function updateStatus(int $id): Response
+    {
+        /** @var User */
+        $user = $this->userRepository->find($id);
+
+        if ($user->isStatus()) {
+            $user->setStatus(false);
+        } else {
+            $user->setStatus(true);
+        }
+
+        $this->em->flush();
+
+        return $this->redirectToRoute('admin_guest_index');
+    }
 }
