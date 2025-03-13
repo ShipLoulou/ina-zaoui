@@ -3,7 +3,7 @@
 {% block admin %}
 	<div class="d-flex justify-content-between align-items-center">
 		<h1>Invité</h1>
-		<a href="#" class="btn btn-primary">Ajouter</a>
+		<a href="{{ path('admin_guest_add') }}" class="btn btn-primary">Ajouter</a>
 	</div>
 	<table class="table">
 		<thead>
@@ -19,9 +19,15 @@
 				<tr class="mediaCard">
 					<td>{{ guest.name }}</td>
 					<td>{{ guest.email }}</td>
-					<td>
-						<a href="#" class="btn btn-info">Bloquer</a>
-					</td>
+					{% if guest.status %}
+						<td>
+							<a href="#" class="btn btn-danger">Bloquer</a>
+						</td>
+					{% else %}
+						<td>
+							<a href="#" class="btn btn-info">Débloquer</a>
+						</td>
+					{% endif %}
 					<td>
 						<a href="#" class="btn btn-danger">Supprimer</a>
 					</td>
