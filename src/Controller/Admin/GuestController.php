@@ -84,4 +84,16 @@ class GuestController extends AbstractController
 
         return $this->redirectToRoute('admin_guest_index');
     }
+
+    #[Route('admin/guest/delete/{id}', name: 'admin_guest_delete')]
+    public function delete($id): Response
+    {
+        /** @var User */
+        $user = $this->userRepository->find($id);
+
+        $this->em->remove($user);
+        $this->em->flush();
+
+        return $this->redirectToRoute('admin_guest_index');
+    }
 }

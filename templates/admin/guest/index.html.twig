@@ -29,7 +29,7 @@
 						</td>
 					{% endif %}
 					<td>
-						<a href="#" class="btn btn-danger">Supprimer</a>
+						<a href="{{ path('admin_guest_delete', {'id': guest.id}) }}" class="btn btn-danger">Supprimer</a>
 					</td>
 				</tr>
 			{% endfor %}
