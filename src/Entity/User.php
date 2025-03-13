@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'user')]
     private Collection $medias;
 
+    #[ORM\Column]
+    private ?bool $status = true;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -191,6 +194,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $madia->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

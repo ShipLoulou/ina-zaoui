@@ -38,6 +38,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         $admin->setName("Ina Zaoui");
         $admin->setPassword($hash);
         $admin->setRoles(["ROLE_ADMIN"]);
+        $admin->setStatus(true);
 
         $manager->persist($admin);
 
@@ -54,6 +55,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $user->setName("Invité $index");
             $user->setPassword($hash);
             $user->setRoles([]);
+            $user->setStatus($faker->boolean(90));
 
             $manager->persist($user);
             $arrayUsers[] = $user;
