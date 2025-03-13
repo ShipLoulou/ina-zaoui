@@ -77,13 +77,16 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         // Création des Medias.
         for ($index = 0; $index < 10; $index++) {
             $media = new Media;
+            /** @var Album */
             $album = $faker->randomElement($arrayAlbums);
             $media->setAlbum($album);
 
-            $formattedIndex = str_pad($index + 1, 4, '0', STR_PAD_LEFT);
+            $indexImage = $index + 1;
+            $formattedIndex = str_pad("$indexImage", 4, '0', STR_PAD_LEFT);
             $media->setPath("uploads/$formattedIndex.jpg");
 
             $media->setTitle("Titre $index");
+            /** @var User */
             $user = $faker->randomElement($arrayUsers);
             $media->setUser($user);
 

@@ -21,9 +21,9 @@ class Album
         return $this->id;
     }
 
-    public function setId(): ?int
+    public function setId(int $id): ?int
     {
-        return $this->id;
+        return $this->id = $id;
     }
 
     public function getName(): string

@@ -75,16 +75,19 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         for ($index = 0; $index < 5051; $index++) {
             $media = new Media;
             if ($index <= 49) {
+                /** @var Album */
                 $album = $faker->randomElement($arrayAlbums);
                 $media->setAlbum($album);
             } else {
                 $media->setAlbum(null);
             }
 
-            $formattedIndex = str_pad($index + 1, 4, '0', STR_PAD_LEFT);
+            $indexImage = $index + 1;
+            $formattedIndex = str_pad("$indexImage", 4, '0', STR_PAD_LEFT);
             $media->setPath("uploads/$formattedIndex.jpg");
 
             $media->setTitle("Titre $index");
+            /** @var User */
             $user = $faker->randomElement($arrayUsers);
             $media->setUser($user);
 
