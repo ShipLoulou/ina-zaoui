@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class GuestController extends AbstractController
 {
@@ -54,7 +55,7 @@ class GuestController extends AbstractController
             /** @var User */
             $user = $form->getData();
 
-            $password = $form->getData()->getPassword();
+            $password = (string) $user->getPassword();
             $hash = $this->encoder->hashPassword($user, $password);
 
             $user->setPassword($hash);
@@ -86,7 +87,7 @@ class GuestController extends AbstractController
     }
 
     #[Route('admin/guest/delete/{id}', name: 'admin_guest_delete')]
-    public function delete($id): Response
+    public function delete(int $id): Response
     {
         /** @var User */
         $user = $this->userRepository->find($id);
