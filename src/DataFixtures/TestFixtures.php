@@ -2,19 +2,32 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\User;
+use App\Entity\Album;
+use App\Entity\Media;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UserFixtures extends Fixture
+class TestFixtures extends Fixture implements FixtureGroupInterface
 {
     public function __construct(
         private UserPasswordHasherInterface $encoder
     ) {}
 
+    public static function getGroups(): array
+    {
+        return ['test'];
+    }
+
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create('fr_FR');
+
+        // Création des Users.
+        $arrayUsers = [];
         $admin = new User;
 
         $hash = $this->encoder->hashPassword($admin, "password");
@@ -28,9 +41,9 @@ class UserFixtures extends Fixture
 
         $manager->persist($admin);
 
-        $this->addReference("user_0", $admin);
+        $arrayUsers[] = $admin;
 
-        for ($index = 1; $index < 25; $index++) {
+        for ($index = 1; $index < 10; $index++) {
             $user = new User;
 
             $hash = $this->encoder->hashPassword($user, "password");
@@ -43,7 +56,38 @@ class UserFixtures extends Fixture
             $user->setRoles([]);
 
             $manager->persist($user);
-            $this->addReference("user_$index", $user);
+            $arrayUsers[] = $user;
+        }
+
+        $albums = [];
+
+        // Création des Albums.
+        $arrayAlbums = [];
+
+        for ($index = 1; $index < 6; $index++) {
+            $album = new Album;
+            $album->setId($index);
+            $album->setName("Album $index");
+
+            $manager->persist($album);
+
+            $arrayAlbums[] = $album;
+        }
+
+        // Création des Medias.
+        for ($index = 0; $index < 25; $index++) {
+            $media = new Media;
+            $album = $faker->randomElement($arrayAlbums);
+            $media->setAlbum($album);
+
+            $formattedIndex = str_pad($index, 4, '0', STR_PAD_LEFT);
+            $media->setPath("uploads/$formattedIndex.jpg");
+
+            $media->setTitle("Titre $index");
+            $user = $faker->randomElement($arrayUsers);
+            $media->setUser($user);
+
+            $manager->persist($media);
         }
 
         $manager->flush();
