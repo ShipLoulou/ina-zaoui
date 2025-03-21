@@ -14,7 +14,7 @@ use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 abstract class FunctionalTestCase extends WebTestCase
 {
     protected KernelBrowser|null $client = null;
-    protected EntityManagerInterface $em;
+    protected object $em;
 
     protected function setUp(): void
     {

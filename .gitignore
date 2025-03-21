@@ -24,4 +24,4 @@ phpstan.neon
 ###< phpstan/phpstan ###
 
 /uploads
-/tests/report
+/tests/report/*

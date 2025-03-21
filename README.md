@@ -1,8 +1,35 @@
-# Ina Zaoui
+# Ina Zaoui • Projet 15
 
-Pour se connecter avec le compte de Ina, il faut utiliser les identifiants suivants:
-- identifiant : `ina`
-- mot de passe : `password`
+![image]({https://img.shields.io/badge/Symfony-000000?style=for-the-badge&logo=Symfony&logoColor=white})
 
-Vous trouverez dans le fichier `backup.zip` un dump SQL anonymisé de la base de données et toutes les images qui se trouvaient dans le dossier `public/uploads`.
-Faudrait peut être trouver une meilleure solution car le fichier est très gros, il fait plus de 1Go.
+Refactorisez le code d'un site pour l'optimiser • Développeur d'application PHP Symfony
+
+## Pour commencer
+
+Entrez ici les instructions pour bien débuter avec votre projet...
+
+### Pré-requis
+
+Ce qu'il est requis pour commencer avec votre projet...
+
+- Programme 1
+- Programme 2
+- etc...
+
+### Installation
+
+- Cloner le repo git
+```
+git clone https://github.com/ShipLoulou/ina-zaoui.git
+```
+- Modifier DATABESE_URL dans le .env
+- Se rendre dans le dossier `/ina-zaoui` et entrer la commande suivante pour initialiser le projet
+```
+make init
+```
+
+## Démarrage
+
+Pour lancer le projet : `make start`
+
+## Usage 

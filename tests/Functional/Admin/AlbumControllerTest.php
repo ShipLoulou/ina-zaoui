@@ -27,7 +27,7 @@ class AlbumControllerTest extends FunctionalTestCase
      *      - Vérifie que l'album à bien été ajouté
      *      - Vérifie que les informations saisies ont été correctements ajoutés. 
      */
-    public function testShouldAddOneAlbum($name = 'Album Test'): void
+    public function testShouldAddOneAlbum(string $name = 'Album Test'): void
     {
         $this->login();
 
@@ -56,7 +56,7 @@ class AlbumControllerTest extends FunctionalTestCase
         self::assertNotNull($album);
     }
 
-    public function testShouldUpdateOneAlbum($newName = 'Album 1 modifier'): void
+    public function testShouldUpdateOneAlbum(string $newName = 'Album 1 modifier'): void
     {
         $this->login();
 
