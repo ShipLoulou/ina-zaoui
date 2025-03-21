@@ -21,6 +21,12 @@ class addAlbumTest extends FunctionalTestCase
         self::assertSelectorCount(5, 'tr.albumCard');
     }
 
+    /**
+     * Vérifie l'ajout d'un album.
+     *      - Ajoute un album
+     *      - Vérifie que l'album à bien été ajouté
+     *      - Vérifie que les informations saisies ont été correctements ajoutés. 
+     */
     public function testShouldAddOneAlbum($name = 'Album Test'): void
     {
         $this->login();
