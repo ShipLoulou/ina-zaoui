@@ -1,9 +1,20 @@
 includes: 
-    - vendor/phpstan/phpstan-doctrine/extension.neon
-    - vendor/php-static-analysis/phpstan-extension/extension.neon
 
 parameters:
-    level: 9
-    paths:
-        - src/
-    treatPhpDocTypesAsCertain: false
+	level: 9
+	paths:
+		- src/
+		- tests/
+	doctrine:
+		objectManagerLoader: phpstan/object-manager.php
+	symfony:
+		containerXmlPath: var/cache/test/App_KernelTestDebugContainer.xml
+		consoleApplicationLoader: phpstan/console.php
+	treatPhpDocTypesAsCertain: false
+	ignoreErrors:
+		-
+			identifier: method.nonObject
+		-
+			identifier: method.notFound
+		-
+			identifier: doctrine.columnType  
