@@ -14,6 +14,7 @@ use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 abstract class FunctionalTestCase extends WebTestCase
 {
     protected KernelBrowser|null $client = null;
+    protected EntityManagerInterface $em;
 
     protected function setUp(): void
     {
@@ -23,6 +24,8 @@ abstract class FunctionalTestCase extends WebTestCase
         // Supprimer les données et regénère les fixtures dans la base de donnée. 
         $databaseTool = $this->getContainer()->get(DatabaseToolCollection::class)->get();
         $databaseTool->loadAllFixtures(['test']);
+
+        $this->em = $this->service('doctrine.orm.entity_manager');
     }
 
     protected function getEntityManager(): object
