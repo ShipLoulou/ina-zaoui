@@ -11,7 +11,7 @@ use App\Tests\Functional\FunctionalTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class AddMedia extends FunctionalTestCase
+class AddMediaTest extends FunctionalTestCase
 {
     /**
      * Vérifie que je trouve bien 10 médias sur la page /admin/media.

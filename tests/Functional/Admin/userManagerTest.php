@@ -18,7 +18,7 @@ class userManagerTest extends FunctionalTestCase
         $this->login();
         $this->get('/admin/guest');
         self::assertResponseIsSuccessful();
-        self::assertSelectorCount(9, 'tr.mediaCard');
+        self::assertSelectorCount(9, 'tr.guestCard');
     }
 
     /**
@@ -53,7 +53,7 @@ class userManagerTest extends FunctionalTestCase
         $this->client->followRedirect();
 
         // Vérifier que le nouvel élément à bien été ajouté.
-        self::assertSelectorCount(10, 'tr.mediaCard');
+        self::assertSelectorCount(10, 'tr.guestCard');
 
         // Vérifier que les bonnes informations ont été enregistrer dans la base de donnée.
         $em = $this->service('doctrine.orm.entity_manager');
