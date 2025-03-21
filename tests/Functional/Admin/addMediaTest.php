@@ -36,7 +36,6 @@ class AddMedia extends FunctionalTestCase
 
         $user = $this->getEntityManager()->getRepository(User::class)->findOneByEmail('ina@zaoui.com');
         $album = $this->getEntityManager()->getRepository(Album::class)->find(1);
-        $em = $this->service('doctrine.orm.entity_manager');
 
         // Création d'une image de test.
         $imagePath = '/tmp/test-image.jpg';
@@ -72,6 +71,8 @@ class AddMedia extends FunctionalTestCase
         self::assertSelectorCount(11, 'tr.mediaCard');
 
         // Vérifier que les bonnes informations ont été enregistrer dans la base de donnée.
+        $em = $this->service('doctrine.orm.entity_manager');
+
         $mediaRepository = $em->getRepository(Media::class);
         $media = $mediaRepository->findOneBy([
             'user' => $user,
