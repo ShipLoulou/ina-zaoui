@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
-use App\Entity\User;
 use App\Entity\Album;
 use App\Entity\Media;
+use App\Entity\User;
 use App\Tests\Functional\FunctionalTestCase;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
 
 class AddMediaTest extends FunctionalTestCase
 {
@@ -28,7 +28,7 @@ class AddMediaTest extends FunctionalTestCase
      * Vérifie l'ajout d'un média.
      *      - Ajoute un média
      *      - Vérifie que le média à bien été ajouté
-     *      - Vérifie que les informations saisies ont été correctements ajoutés. 
+     *      - Vérifie que les informations saisies ont été correctements ajoutés.
      */
     public function testShouldAddOneMedia(): void
     {
@@ -56,7 +56,7 @@ class AddMediaTest extends FunctionalTestCase
                     'image/jpeg',
                     null,
                     true
-                )
+                ),
             ]
         );
 
@@ -77,7 +77,7 @@ class AddMediaTest extends FunctionalTestCase
         $media = $mediaRepository->findOneBy([
             'user' => $user,
             'album' => $album,
-            'title' => 'Titre de test'
+            'title' => 'Titre de test',
         ]);
 
         self::assertNotNull($media);

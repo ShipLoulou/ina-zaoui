@@ -25,13 +25,13 @@ class userManagerTest extends FunctionalTestCase
      * Vérifie l'ajout d'un invité.
      *      - Ajoute un invité
      *      - Vérifie que l'invité à bien été ajouté
-     *      - Vérifie que les informations saisies ont été correctements ajoutés. 
+     *      - Vérifie que les informations saisies ont été correctements ajoutés.
      */
     public function testShouldAddOneGuest(
         string $name = 'Invité Test',
         string $description = 'Description de test',
         string $email = 'test@test.com',
-        string $password = 'password'
+        string $password = 'password',
     ): void {
         $this->login();
 
@@ -43,7 +43,7 @@ class userManagerTest extends FunctionalTestCase
                 'user[name]' => $name,
                 'user[description]' => $description,
                 'user[email]' => $email,
-                'user[password]' => $password
+                'user[password]' => $password,
             ]
         );
 
@@ -62,7 +62,7 @@ class userManagerTest extends FunctionalTestCase
         $user = $userRepository->findOneBy([
             'name' => $name,
             'description' => $description,
-            'email' => $email
+            'email' => $email,
         ]);
 
         self::assertNotNull($user);

@@ -14,7 +14,7 @@ class Media
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Album::class, fetch: "EAGER")]
+    #[ORM\ManyToOne(targetEntity: Album::class, fetch: 'EAGER')]
     private ?Album $album = null;
 
     #[ORM\Column]

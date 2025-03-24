@@ -15,7 +15,7 @@ class LoginTest extends FunctionalTestCase
 
         $this->client->submitForm('Connexion', [
             '_username' => 'ina@zaoui.com',
-            '_password' => 'password'
+            '_password' => 'password',
         ]);
 
         $authorizationChecker = $this->service(AuthorizationCheckerInterface::class);
@@ -29,7 +29,7 @@ class LoginTest extends FunctionalTestCase
 
         $this->client->submitForm('Connexion', [
             '_username' => 'ina@zaoui.com',
-            '_password' => 'fail'
+            '_password' => 'fail',
         ]);
 
         $authorizationChecker = $this->service(AuthorizationCheckerInterface::class);

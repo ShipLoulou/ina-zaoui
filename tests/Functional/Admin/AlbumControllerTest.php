@@ -25,7 +25,7 @@ class AlbumControllerTest extends FunctionalTestCase
      * Vérifie l'ajout d'un album.
      *      - Ajoute un album
      *      - Vérifie que l'album à bien été ajouté
-     *      - Vérifie que les informations saisies ont été correctements ajoutés. 
+     *      - Vérifie que les informations saisies ont été correctements ajoutés.
      */
     public function testShouldAddOneAlbum(string $name = 'Album Test'): void
     {
@@ -36,7 +36,7 @@ class AlbumControllerTest extends FunctionalTestCase
         $this->submit(
             'Ajouter',
             [
-                'album[name]' => $name
+                'album[name]' => $name,
             ]
         );
 
@@ -50,7 +50,7 @@ class AlbumControllerTest extends FunctionalTestCase
 
         $albumRepository = $this->em->getRepository(Album::class);
         $album = $albumRepository->findOneBy([
-            'name' => $name
+            'name' => $name,
         ]);
 
         self::assertNotNull($album);
@@ -71,7 +71,7 @@ class AlbumControllerTest extends FunctionalTestCase
         $this->submit(
             'Modifier',
             [
-                'album[name]' => $newName
+                'album[name]' => $newName,
             ]
         );
 

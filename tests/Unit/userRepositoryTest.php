@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit;
 
 use App\Entity\User;
-use PHPUnit\Framework\TestCase;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -26,7 +25,7 @@ class userRepositoryTest extends KernelTestCase
 
     protected function createUser(): User
     {
-        $user = new User;
+        $user = new User();
 
         $user->setName('New User');
         $user->setEmail('new@test.com');

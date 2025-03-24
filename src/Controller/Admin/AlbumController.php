@@ -16,8 +16,9 @@ class AlbumController extends AbstractController
 {
     public function __construct(
         private AlbumRepository $albumRepository,
-        private EntityManagerInterface $em
-    ) {}
+        private EntityManagerInterface $em,
+    ) {
+    }
 
     #[Route('/admin/album', name: 'admin_album_index')]
     public function index(): Response

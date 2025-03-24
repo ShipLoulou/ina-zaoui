@@ -16,8 +16,9 @@ class MediaController extends AbstractController
 {
     public function __construct(
         private MediaRepository $mediaRepository,
-        private EntityManagerInterface $em
-    ) {}
+        private EntityManagerInterface $em,
+    ) {
+    }
 
     #[Route('/admin/media', name: 'admin_media_index')]
     public function index(Request $request): Response
@@ -41,7 +42,7 @@ class MediaController extends AbstractController
         return $this->render('admin/media/index.html.twig', [
             'medias' => $medias,
             'total' => $total,
-            'page' => $page
+            'page' => $page,
         ]);
     }
 
@@ -59,7 +60,7 @@ class MediaController extends AbstractController
             }
             $file = $media->getFile();
             if ($file instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
-                $media->setPath('uploads/' . md5(uniqid()) . '.' . $file->guessExtension());
+                $media->setPath('uploads/'.md5(uniqid()).'.'.$file->guessExtension());
                 $file->move('uploads/', $media->getPath());
             }
             $this->em->persist($media);
@@ -88,6 +89,7 @@ class MediaController extends AbstractController
     private function getAuthenticatedUser(): ?User
     {
         $user = $this->getUser();
+
         return $user instanceof User ? $user : null;
     }
 }

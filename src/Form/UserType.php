@@ -22,10 +22,10 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [])
             ->add('password', PasswordType::class, [])
             ->add('name', TextType::class, [
-                'label' => 'Nom complet'
+                'label' => 'Nom complet',
             ])
             ->add('description', TextareaType::class, [
-                'required' => false
+                'required' => false,
             ])
         ;
     }

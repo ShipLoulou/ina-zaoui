@@ -4,23 +4,22 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Doctrine\ORM\Query\Expr\Func;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Routing\Attribute\Route;
 
 class GuestController extends AbstractController
 {
     public function __construct(
         private UserRepository $userRepository,
         private EntityManagerInterface $em,
-        private UserPasswordHasherInterface $encoder
-    ) {}
+        private UserPasswordHasherInterface $encoder,
+    ) {
+    }
 
     #[Route('/admin/guest', name: 'admin_guest_index')]
     public function index(Request $request): Response
@@ -41,7 +40,7 @@ class GuestController extends AbstractController
         return $this->render('admin/guest/index.html.twig', [
             'guests' => $guests,
             'total' => $total,
-            'page' => $page
+            'page' => $page,
         ]);
     }
 

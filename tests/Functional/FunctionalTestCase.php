@@ -6,14 +6,14 @@ namespace App\Tests\Functional;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DomCrawler\Crawler;
+use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
+use Symfony\Component\DomCrawler\Crawler;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
-    protected KernelBrowser|null $client = null;
+    protected ?KernelBrowser $client = null;
     protected object $em;
 
     protected function setUp(): void
@@ -21,7 +21,7 @@ abstract class FunctionalTestCase extends WebTestCase
         parent::setUp();
         $this->client = static::createClient();
 
-        // Supprimer les données et regénère les fixtures dans la base de donnée. 
+        // Supprimer les données et regénère les fixtures dans la base de donnée.
         $databaseTool = $this->getContainer()->get(DatabaseToolCollection::class)->get();
         $databaseTool->loadAllFixtures(['test']);
 
@@ -37,6 +37,7 @@ abstract class FunctionalTestCase extends WebTestCase
     {
         $service = $this->client->getContainer()->get($id);
         self::assertNotNull($service);
+
         return $service;
     }
 

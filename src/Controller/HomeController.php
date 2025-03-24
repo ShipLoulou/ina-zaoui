@@ -2,22 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
-use App\Repository\UserRepository;
 use App\Repository\AlbumRepository;
 use App\Repository\MediaRepository;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\User;
 
 class HomeController extends AbstractController
 {
     public function __construct(
         private UserRepository $userRepository,
         private AlbumRepository $albumRepository,
-        private MediaRepository $mediaRepository
-    ) {}
+        private MediaRepository $mediaRepository,
+    ) {
+    }
 
     #[Route('/', name: 'home')]
     public function home(): Response
@@ -38,13 +37,13 @@ class HomeController extends AbstractController
             $mediaCount = $this->mediaRepository->countMediaByUser($userId);
             $arrayMediaPerGuest[] = [
                 'user' => $guest,
-                'numberMedia' => $mediaCount
+                'numberMedia' => $mediaCount,
             ];
         }
 
         return $this->render('front/guests.html.twig', [
             'guests' => $guests,
-            'arrayMediaPerGuest' => $arrayMediaPerGuest
+            'arrayMediaPerGuest' => $arrayMediaPerGuest,
         ]);
     }
 
@@ -52,8 +51,9 @@ class HomeController extends AbstractController
     public function guest(int $id): Response
     {
         $guest = $this->userRepository->find($id);
+
         return $this->render('front/guest.html.twig', [
-            'guest' => $guest
+            'guest' => $guest,
         ]);
     }
 
@@ -67,10 +67,11 @@ class HomeController extends AbstractController
         $medias = $album
             ? $this->mediaRepository->findByAlbum($album)
             : $this->mediaRepository->findByUser($user);
+
         return $this->render('front/portfolio.html.twig', [
             'albums' => $albums,
             'album' => $album,
-            'medias' => $medias
+            'medias' => $medias,
         ]);
     }
 
