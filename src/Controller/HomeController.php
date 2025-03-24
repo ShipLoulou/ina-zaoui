@@ -28,9 +28,23 @@ class HomeController extends AbstractController
     #[Route('/guests', name: 'guests')]
     public function guests(): Response
     {
+        $arrayMediaPerGuest = [];
+
         $guests = $this->userRepository->findBy(['admin' => false]);
+
+        foreach ($guests as $guest) {
+            /** @var int */
+            $userId = $guest->getId();
+            $mediaCount = $this->mediaRepository->countMediaByUser($userId);
+            $arrayMediaPerGuest[] = [
+                'user' => $guest,
+                'numberMedia' => $mediaCount
+            ];
+        }
+
         return $this->render('front/guests.html.twig', [
-            'guests' => $guests
+            'guests' => $guests,
+            'arrayMediaPerGuest' => $arrayMediaPerGuest
         ]);
     }
 
