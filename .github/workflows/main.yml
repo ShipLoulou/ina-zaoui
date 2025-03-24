@@ -1,0 +1,69 @@
+name: Integration Continue
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['8.2', '8.3']
+    services:
+      postgres:
+        image: postgres:16-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres?serverVersion=16&charset=utf8"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, xml, ctype, iconv, intl
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Wait for PostgreSQL
+        run: |
+          echo "Waiting for PostgreSQL to be ready..."
+          for i in {1..10}; do
+            nc -z localhost 5432 && echo "PostgreSQL is up!" && break
+            echo "Waiting..."
+            sleep 3
+          done
+
+      - name: Prepare database
+        run: |
+          php bin/console doctrine:database:drop --force --if-exists --env=test
+          php bin/console doctrine:database:create --env=test
+          php bin/console doctrine:migrations:migrate -n --env=test
+          php bin/console doctrine:fixtures:load -n --purge-with-truncate --env=test
+
+      - name: Build assets
+        run: php bin/console sass:build
+
+      - name: Run tests
+        run: php bin/phpunit
+
+      - name: Static analysis
+        run: php vendor/bin/phpstan
