@@ -1,20 +1,17 @@
 # Ina Zaoui • Projet 15
 
-![image]({https://img.shields.io/badge/Symfony-000000?style=for-the-badge&logo=Symfony&logoColor=white})
+<img src="public/images/name.png" alt="CritiPixel" width="200" />
 
 Refactorisez le code d'un site pour l'optimiser • Développeur d'application PHP Symfony
-
-## Pour commencer
-
-Entrez ici les instructions pour bien débuter avec votre projet...
 
 ### Pré-requis
 
 Ce qu'il est requis pour commencer avec votre projet...
 
-- Programme 1
-- Programme 2
-- etc...
+* PHP >= 8.2
+* Composer
+* Extension PHP Xdebug
+* Symfony (binaire)
 
 ### Installation
 
@@ -22,14 +19,62 @@ Ce qu'il est requis pour commencer avec votre projet...
 ```
 git clone https://github.com/ShipLoulou/ina-zaoui.git
 ```
-- Modifier DATABESE_URL dans le .env
-- Se rendre dans le dossier `/ina-zaoui` et entrer la commande suivante pour initialiser le projet
+- Créer un fichier .env.local et renseigner votre DATABESE_URL
+- Se rendre dans le dossier `/ina-zaoui`
+
+#### Vous pouvez intialiser la projet de manière automatique ou manuel
+
+##### Automatique
+- Entrer la commande suivante pour initialiser le projet
 ```
 make init
 ```
 
+##### Manuel
+- Installer les dépendences composer 
+```
+Composer install
+```
+- Installer les dépendences composer 
+```
+Composer install
+```
+- Créer la base de donnée
+```
+php bin/console doctrine:database:create
+```
+- Mettre à jour la base de donnée
+```
+php bin/console doctrine:schema:update --force
+```
+- Charger les fixtures
+```
+php bin/console d:f:l --no-interaction --group=app
+```
+
+Effectuer les même opération pour utiliser la base de donnée de test en rajoutant --env=test, et en remplacant --group=app par --group=test pour les fixtures
+
+
 ## Démarrage
 
-Pour lancer le projet : `make start`
+Pour lancer le projet :
+```
+make start
+```
 
 ## Usage 
+
+### Test
+
+Pour lancer les tests : (assurer d'avoir créer la base de donnée de test au préalable)
+```
+make test
+```
+
+### Coverage
+
+Réaliser un test de couverture des tests :
+```
+make coverage
+```
+Résultat dans : `tests/report`
