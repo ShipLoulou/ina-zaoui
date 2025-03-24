@@ -1,6 +1,6 @@
 # Ina Zaoui • Projet 15
 
-<img src="public/images/name.png" alt="CritiPixel" width="200" />
+<img src="public/images/home.png" alt="CritiPixel" width="200" />
 
 Refactorisez le code d'un site pour l'optimiser • Développeur d'application PHP Symfony
 
