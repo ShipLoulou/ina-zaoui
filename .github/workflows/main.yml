@@ -13,21 +13,21 @@ jobs:
       matrix:
         php-versions: ['8.2', '8.3']
     services:
-      postgres:
-        image: postgres:16-alpine
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd="pg_isready -U postgres"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+        mysql:
+            image: mysql:8.0
+            env:
+              MYSQL_ROOT_PASSWORD: password
+              MYSQL_DATABASE: app_test
+            ports:
+              - 3306:3306
+            options: >-
+              --health-cmd="mysqladmin ping --silent"
+              --health-interval=10s
+              --health-timeout=5s
+              --health-retries=5
 
     env:
-      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/postgres?serverVersion=16&charset=utf8"
+      DATABASE_URL: "mysql://root:password@127.0.0.1:3306/app_test?serverVersion=8.0&charset=utf8mb4"
 
     steps:
       - name: Checkout code
@@ -37,20 +37,20 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, xml, ctype, iconv, intl
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
           tools: composer
 
       - name: Install dependencies
         run: composer install
 
-      - name: Wait for PostgreSQL
+      - name: Wait for MySQL
         run: |
-          echo "Waiting for PostgreSQL to be ready..."
-          for i in {1..10}; do
-            nc -z localhost 5432 && echo "PostgreSQL is up!" && break
+            echo "Waiting for MySQL to be ready..."
+            for i in {1..10}; do
+            nc -z localhost 3306 && echo "MySQL is up!" && break
             echo "Waiting..."
             sleep 3
-          done
+            done
 
       - name: Prepare database
         run: |
