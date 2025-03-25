@@ -52,6 +52,7 @@ cd ina-zaoui
 ```
 - Créer un fichier .env.local à la racine avec votre configuration de base de données : 
 `DATABASE_URL="mysql://user:password@127.0.0.1:3306/ina_zaoui"`
+- Télécharger le [fichier](https://www.swisstransfer.com/d/6a9da88e-d768-4d92-b4a2-48b8f41d3737) qui contient les images du projet et les mettres dans le dossier `public/uploads`
 
 ### 🔁 Méthode automatique
 - Entrer la commande suivante pour initialiser le projet
