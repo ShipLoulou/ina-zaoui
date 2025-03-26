@@ -26,8 +26,8 @@ class Media
 
     #[Assert\File(
         maxSize: '2M',
-        mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-        mimeTypesMessage: 'Veuillez uploader une image valide (jpeg, png, webp).'
+        mimeTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'],
+        mimeTypesMessage: 'Veuillez uploader une image valide (jpeg, jpg, png, webp).'
     )]
     private ?UploadedFile $file = null;
 

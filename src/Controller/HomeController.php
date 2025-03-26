@@ -15,8 +15,7 @@ class HomeController extends AbstractController
         private UserRepository $userRepository,
         private AlbumRepository $albumRepository,
         private MediaRepository $mediaRepository,
-    ) {
-    }
+    ) {}
 
     #[Route('/', name: 'home')]
     public function home(): Response

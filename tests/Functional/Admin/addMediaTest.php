@@ -38,9 +38,7 @@ class AddMediaTest extends FunctionalTestCase
         $album = $this->getEntityManager()->getRepository(Album::class)->find(1);
 
         // Création d'une image de test.
-        $imagePath = '/tmp/test-image.jpg';
-        $imageContent = file_get_contents('https://placehold.co/600x400');
-        file_put_contents($imagePath, $imageContent);
+        $imagePath = __DIR__ . '/../../Fixtures/images/test-image.jpeg';
 
         $this->get('/admin/media/add');
 
@@ -52,7 +50,7 @@ class AddMediaTest extends FunctionalTestCase
                 'media[title]' => 'Titre de test',
                 'media[file]' => new UploadedFile(
                     $imagePath,
-                    'test-image.jpg',
+                    'test-image.jpeg',
                     'image/jpeg',
                     null,
                     true
